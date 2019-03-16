@@ -1,0 +1,27 @@
+<h1 class="display-4">Counting calories</h1>
+<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+  <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+  <div class="form-group">
+    <input name="product" #product="ngModel" [(ngModel)]="service.formData.product" class="form-control"
+      placeholder="Product" required>
+    <div *ngIf="product.invalid && product.touched" class="validation-error">This field is required.</div>
+  </div>
+  <div class="form-group">
+    <input name="mealtime" #mealtime="ngModel" [(ngModel)]="service.formData.mealtime" class="form-control"
+      placeholder="mealtime">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <input name="weight" #weight="ngModel" [(ngModel)]="service.formData.weight" class="form-control"
+        placeholder="weight">
+    </div>
+    <div class="form-group  col-md-6">
+      <input name="calorie" #calorie="ngModel" [(ngModel)]="service.formData.calorie" class="form-control"
+        placeholder="calorie">
+    </div>
+  </div>
+  <div class="form-group">
+    <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block btn-info">SUBMIT</button>
+  </div>
+
+</form>
