@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FoodItemService } from 'src/app/shared/food-item.service';
+import { FoodItem } from 'src/app/shared/food-item.model';
 
 @Component({
   selector: 'app-food-list',
@@ -6,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./food-list.component.css']
 })
 export class FoodListComponent implements OnInit {
-
-  constructor() { }
+  list: FoodItem[];
+  constructor( private service: FoodItemService) { }
 
   ngOnInit() {
+    this.service.getFood().subscribe(actionArray =>{
+      this.list = actionArray.map(item => {
+        return {
+          id: item.payload.doc.id,
+          ...item.payload.doc.data()
+        } as FoodItem;
+      });
+   
+    })
   }
 
 }
